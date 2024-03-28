@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { UserService } from "../../services/UserService";
-import Loading from "../Loading";
+import Loading from "../../components/Loading";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Inicia o loading
-    setIsLoading(true);
+    setIsLoading(true); // Inicia o loading
 
-    // Substitua o setTimeout por UserService.getAllUsers() na prática real
     setTimeout(() => {
       UserService.getAllUsers()
         .then((response) => {
@@ -21,17 +19,15 @@ const UserList = () => {
           console.error("There was an error!", error);
           setIsLoading(false); // Encerra o loading mesmo se houver erro
         });
-    }, 2000); // Espera 2 segundos antes de fazer a requisição
+    }, 2000); // Simula espera de 2 segundos antes de fazer a requisição
   }, []);
 
-  if (isLoading) {
-    return <Loading />; // Exibe a animação de loading enquanto isLoading for true
-  }
-
   return (
-    <>
-      <div>
-        <h2>Lista de Usuários</h2>
+    <div>
+      <h2>Lista de Usuários</h2>
+      {isLoading ? (
+        <Loading /> // Exibe a animação de loading enquanto os dados estão sendo carregados
+      ) : (
         <ul>
           {users.map((user) => (
             <li key={user.id}>
@@ -39,8 +35,8 @@ const UserList = () => {
             </li>
           ))}
         </ul>
-      </div>
-    </>
+      )}
+    </div>
   );
 };
 

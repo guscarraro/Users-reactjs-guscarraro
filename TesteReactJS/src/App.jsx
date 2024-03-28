@@ -1,15 +1,18 @@
 import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import "./App.css";
-import UserList from "./components/Userlist";
+
+import Paginas from "./pages";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
-      <UserList></UserList>
-    </>
+    <div>
+      <Paginas />
+    </div>
   );
 }
 
